@@ -6,12 +6,11 @@
 #include<iomanip>
 
 using namespace std;
-
 struct student{
-	char name[100];
+	string name;
 	int id;
     char gender;
-    float gpa;
+	double gpa;
 };
 
 struct course{
@@ -65,7 +64,7 @@ int main(){
 	while(getline(student_file,textline)){
 		student s; 
 		
-		sscanf(textline.c_str(),"%[^,],%d,%c,%f",s.name,&s.id,&s.gender,&s.gpa);
+		scanf(textline.c_str(), "%[^:],%d,%c,%f", s.name, &s.id, &s.gender, &s.gpa);
 
 		allstudents.push_back(s); 		
 	}
@@ -84,18 +83,14 @@ int main(){
 			if(textline == "> Students"){
 				state = 3;
 			}else{
-			
-			    allcourses[allcourses.size()-1].lecture_list.push_back(textline);
-			    
+				allcourses[allcourses.size()-1].lecture_list.push_back(textline);
 			}			
 		}else{
 			if(textline == "---------------------------------------"){
 				state = 1;
 			}else{
 				student *p = findstudent(allstudents,atof(textline.c_str()));
-				
 				allcourses[allcourses.size()-1].student_list.push_back(p);
-				
 			}
 		}
 	}
